@@ -32,11 +32,12 @@ public class signUpController {
 	    if (!isValidUser){
 	    	User user=new User();
 	    	user.setAccount(request.getParameter("signUpAccount"));
-	    	user.setName(request.getParameter("signUpName"));
+	    	user.setName(toUtf8(request.getParameter("signUpName")));
 	    	user.setPasswd(request.getParameter("signUpPasswd"));
 	    	user.setEmail(request.getParameter("signUpEmail"));
 	    	user.setGender(request.getParameter("signUpGender"));
 	    	user.setAge(Integer.parseInt(request.getParameter("signUpAge")));
+	    	System.out.print("GGGGGGGGGGGGGGGGG:"+user.getName());
 	    	userService.createAccount(user);
 	    	request.getSession().invalidate();
 	        return new ModelAndView("signUpSuccess");
@@ -45,6 +46,15 @@ public class signUpController {
 	        request.getSession().setAttribute("accountCheck",false);
 	        return new ModelAndView("signUp");
 	    }
+    }
+    public static String toUtf8(String str) {
+    	try {
+			return new String(str.getBytes("iso-8859-1"),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
     }
 	
     @Autowired

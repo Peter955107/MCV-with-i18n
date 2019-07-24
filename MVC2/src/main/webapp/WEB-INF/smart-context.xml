@@ -21,11 +21,6 @@
 
     <context:component-scan base-package="com.smart.service"/>
     
-	
-	<mvc:interceptors>
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
-	</mvc:interceptors>
-	
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename">
 			<value>/WEB-INF/i18n/messages</value>
@@ -37,6 +32,9 @@
 		<property name="defaultLocale" value="zh_TW" />
 	</bean>
 	
+	<mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+	</mvc:interceptors>
     <!-- dataSource 配置 -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" primary="true">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
